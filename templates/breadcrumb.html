@@ -1,0 +1,8 @@
+<ol class="navbar-fixed-top breadcrumb">
+  {% for name, link in resources.parents.items() %}
+    {% if not loop.first %}
+      <li class="breadcrumb-item"><a href="{{ link }}">{{ name }}</a></li>
+    {% endif %}
+  {% endfor %}
+  <li class="breadcrumb-item active" aria-current="page">{{ resources['notebook_name'] }}</li>
+</ol>

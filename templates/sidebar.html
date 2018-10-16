@@ -1,0 +1,123 @@
+{% set sidebar = resources.sidebar %}
+
+<link rel="stylesheet" type="text/css" href="{{site_libs_path}}/css/sidebar.css">
+<script src="{{site_libs_path}}/js/sidebar.js"></script>
+
+<!-- Cell manipulation for the display control panel-->
+<script src="{{site_libs_path}}/js/cell_manipulation.js"></script>
+
+<!-- Table of contents-->
+<link rel="stylesheet" type="text/css" href="{{site_libs_path}}/css/toc2.css">
+<script src="{{site_libs_path}}/js/doc_toc.js"></script>
+
+<script>
+  sidebar = generate_sidebar('{{ sidebar.logo_source }}', '{{ sidebar.homepage }}');
+
+  add_display_control_panel(sidebar); <!-- Control panel for cell manipulation -->
+
+  var cfg={
+    'threshold': {{ resources.toc.threshold }},
+    'number_sections': {{ resources.toc.number_sections }},
+  };
+
+  $( document ).ready(function(){
+    attach_sidebar(sidebar);
+    table_of_contents(sidebar, cfg);
+    {#$('#toc').css('height', sidebsar.height() - $("#sidebar-header").height());#}
+  });
+
+</script>
+
+
+
+{#    // These lines are commented out since necessary files need to be created#}
+{#    // var file=$%{path}Dict[$("h1:first").attr("id")];#}
+{#    // $("#toc-level0 a").css("color","#126dce");#}
+{#    // $('a[href="#'+$("h1:first").attr("id")+'"]').hide()#}
+{#    // var docs=$%{path}Array;#}
+{#    // var docs_map=$%{path}ArrayMap;#}
+{#    // var pos=$%{path}Array.indexOf(file);#}
+{#    // for (var a=pos;a>=0;a--){#}
+{#    //   $('<li><a href="'+docs[a]+'.html"><font color="#073642"><b>'+docs_map[docs[a]].replace(/_/g," ")+'</b></font></a></li>').insertBefore("#toc-level0 li:eq(0)");#}
+{#    // }#}
+{#    // $('a[href="'+file+'.html'+'"]').css("color","#126dce");#}
+{#    // for (var a=pos+1;a<docs.length;a++){#}
+{#    //   $(".toc #toc-level0").append('<li><a href="'+docs[a]+'.html"><font color="#073642"><b>'+docs_map[docs[a]].replace(/_/g," ")+'</b></font></a></li>');#}
+{#    // }#}
+{#    // $("#toc-header").hide(); // comment out because it prevents search bar from displaying#}
+{#  });#}
+
+
+
+{# Sidebar resizing #}
+
+{#$(window).resize(function () {#}
+{#    $('#toc').css({#}
+{#        maxHeight: $(window).height()#}
+{#    });#}
+{#    $('#sidebar').css({#}
+{#        maxHeight: $(window).height()#}
+{#    });#}
+{#    setNotebookWidth(cfg);#}
+{#});#}
+{#$(window).trigger('resize');#}
+
+{#function setNotebookWidth(cfg) {#}
+{#    //cfg.widenNotebook  = false;#}
+{#    if ($('#sidebar').is(':visible')) {#}
+{#        $('#notebook-container').css('margin-left', $('#sidebar').width() + 30)#}
+{#        $('#notebook-container').css('width', $('#notebook').width() - $('#sidebar').width() - 30)#}
+{#    } else {#}
+{#        if (cfg.widenNotebook) {#}
+{#            $('#notebook-container').css('margin-left', 30);#}
+{#            $('#notebook-container').css('width', $('#notebook').width() - 30);#}
+{#        } else { // original width#}
+{#            $("#notebook-container").css({#}
+{#                'width': "82%",#}
+{#                'margin-left': 'auto'#}
+{#            })#}
+{#        }#}
+{#    }#}
+{#}#}
+
+{#    // $('#sidebar').resizable({#}
+{#    //     handles: 'e',#}
+{#    //     resize: function (event, ui) {#}
+{#    //         setNotebookWidth(cfg, st)#}
+{#    //         $(this).css('height', '100%');#}
+{#    //     },#}
+{#    //     start: function (event, ui) {#}
+{#    //         $(this).width($(this).width());#}
+{#    //         //$(this).css('position', 'fixed');#}
+{#    //     },#}
+{#    //     stop: function (event, ui) {#}
+{#    //         // Ensure position is fixed (again)#}
+{#    //         //$(this).css('position', 'fixed');#}
+{#    //         $(this).css('height', '100%');#}
+{#    //         $('#toc').css('height', $('#sidebar').height() - $("#sidebar-header").height());#}
+{#    //     }#}
+{#    // })#}
+
+{#    // if sidebar is undefined (first run(?), then hide it)#}
+{#    if (sidebar.css('display') === undefined) sidebar.css('display', "none") //block#}
+
+{#    // Ensure position is fixed#}
+{#    sidebar#}
+{#      .addClass('sidebar-wrapper')#}
+{#      .css('position', 'fixed')#}
+{#      .css('width', '230px')#}
+{#      .css('height', '100%')#}
+{#      .css('left', 0);#}
+
+{#    // Bind sitebar height to site height#}
+{#    $('#site').bind('siteHeight', function () {#}
+{#      sidebar.css('height', $('#site').height());#}
+{#    });#}
+{#    $('#site').trigger('siteHeight');#}
+
+{#    // Set sidebar height after a short delay#}
+{#    setTimeout(function() {sidebar.css('top', 0)}, 500)#}
+
+{#    // Set notebook container left margin#}
+{#    $('#notebook-container').css('margin-left', '230px');#}
+{#  }#}

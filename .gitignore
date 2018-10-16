@@ -1,0 +1,9 @@
+*.idea
+.ipynb_checkpoints
+*.png
+*.pdf
+__pycache__*
+jnbinder/site_libs
+site-libs/site_libs
+docs
+tmp/*

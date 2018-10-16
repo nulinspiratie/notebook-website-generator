@@ -1,0 +1,134 @@
+{%- extends 'basic.tpl' -%}
+
+{% set site_libs_path = resources.site_libs_path %}
+
+{%- block header -%}
+{{ super() }}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="ipynb_website:version" content="{{ resources.version }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{ resources.experiment_title }} - {{ resources.notebook_name }}</title>
+
+    <!-- Julia theme-->
+    <link rel="stylesheet" type="text/css" href="{{site_libs_path}}/css/jt.css">
+    {{jt_theme_link}}
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{site_libs_path}}/css/custom.css">
+
+    <!-- jQuery -->
+    <script src="{{site_libs_path}}/site_libs/jquery-3.3.1.min.js"></script>
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+
+    <!-- jQuery UI -->
+    <link href="{{site_libs_path}}/site_libs/jqueryui-1.12.1/jquery-ui.css">
+    <script src="{{site_libs_path}}/site_libs/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>-->
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="{{site_libs_path}}/site_libs/bootstrap-3.3.5/css/{{ resources.theme }}.min.css" rel="stylesheet" />
+    <script src="{{site_libs_path}}/site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script src="{{site_libs_path}}/site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+    <script src="{{site_libs_path}}/site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="{{site_libs_path}}/site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Auto highlighting -->
+    <link rel="stylesheet" href="{{site_libs_path}}/site_libs/highlightjs/{{ resources.auto_highlight_1 }}.min.css" type="text/css" />
+    <script src="{{site_libs_path}}/site_libs/highlightjs/highlight.{{ resources.auto_highlight_0 }}.js"></script>
+    <script src="{{site_libs_path}}/js/auto_highlight.js"></script>
+
+    <!-- MathJax -->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>-->
+    <script src="{{site_libs_path}}/site_libs/MathJax/MathJax.js"></script>
+    <script src="{{site_libs_path}}/js/mathjax.js"></script>
+
+    <!-- Sidebar -->
+    {% if resources.sidebar.enabled %}
+        {% include "sidebar.html" %}
+
+    {% endif%}
+
+    <!-- Menu anchor (To activate TOC sidebar link) -->
+    <!--<script src="{site_libs_path}}/js/menu_anchor.js"></script>-->
+
+    <!-- fluid container goes here(not sure what it does) -->
+{#    $%{fluid_container}#}
+</head>
+
+<body>
+<!-- Top navigation bar -->
+{% include "navbar.html" %}
+
+<div tabindex="-1" id="notebook" class="border-box-sizing">
+
+  {% if resources.parents|length > 0 %}
+    {% include "breadcrumb.html" %}
+  {% endif %}
+
+    <div class="container" id="notebook-container">
+
+        {%- endblock header -%}
+
+        {%- block input -%}
+
+            {%- if 'scratch' in cell.metadata.tags -%}
+            {%- elif 'report_cell' in cell.metadata.tags -%}
+                {{ super() }}
+            {%- else -%}
+                <div class="hidden_content">
+                {{ super() }}
+                </div>
+           {%- endif -%}
+        {%- endblock input -%}
+
+        {% block output %}
+            {%- if 'report_output' in cell.metadata.tags -%}
+                {{ super() }}
+            {%- elif 'report_cell' in cell.metadata.tags -%}
+                {{ super() }}
+            {%- elif 'scratch' in cell.metadata.tags -%}
+            {%- else -%}
+                <!--<div class="hidden_content">-->
+                {{ super() }}
+                <!--</div>-->
+           {%- endif -%}
+        {% endblock output %}
+
+        {% block markdowncell %}
+            {%- if 'hide_output' in cell.metadata.tags -%}
+                <div class="hidden_content">
+                {{ super() }}
+                </div>
+            {%- elif 'scratch' in cell.metadata.tags -%}
+            {%- else -%}
+                {{ super() }}
+           {%- endif -%}
+        {%- endblock markdowncell -%}
+
+
+        {% block codecell %}
+
+        {%- if cell['metadata'].get('kernel',none) is not none -%}
+            <div class="rendered lan_{{cell['metadata'].get('kernel', none)}}">
+            {{ super() }}
+            </div>
+        {%- else -%}
+            {{ super() }}
+        {%- endif -%}
+
+        {%- endblock codecell %}
+
+        {% block footer %}
+        <hr>
+        {{ footer }}
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

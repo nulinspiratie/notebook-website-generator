@@ -1,0 +1,41 @@
+name: 'Antimony measurements'
+
+#base_dir: "\\\\129.94.115.35\\GitHub Queenie\\Experiments\\Antimony"
+base_dir: "C:\\Users\\Serwan\\Documents\\GitHub\\Experiments\\Antimony"
+target_dir: "docs"
+pdf_target_dir: "\\\\scipnns001.ad.unsw.edu.au\\qsc\\chaos"
+measurement_overview_folder: "Measurement overview"
+
+sections:
+  "Antimony information": "analysis/Antimony information.ipynb"
+  "Measurement overview":
+    path: "analysis/measurement overview"
+    notebook_class: "LogNotebook"
+  Analysis:
+    path: "analysis"
+    notebook_class: "LogNotebook"
+
+template:
+  template_dir: "templates"
+  version: '1.0'
+  jt_theme_link: ''
+  theme: 'cosmo'
+  auto_highlight_1: 'null'
+  auto_highlight_0: 'pack'
+  font: "Droid Sans"
+  experiment_title: 'Antimony'
+  footer: "&copy 2015-2018 Serwan Asaad, Mark Johnson, Vincent Mourik at Andrea Morello's lab, UNSW"
+  sidebar:
+    enabled: True
+    logo_source: '' # Source for logo image (not added if empty)
+    homepage: ''
+  toc:
+    threshold: 3 # Max header level to display
+    number_sections: 0
+
+  # These items are set while generating templates
+  navbar_sections: {}
+  base_path: None  # relative path to base
+  site_libs_path: None  # relative path to site libs
+  parents: None  # {parent_name: relative parent link}
+  notebook_name: None  # Name of current notebook
