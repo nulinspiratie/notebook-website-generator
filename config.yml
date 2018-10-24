@@ -1,37 +1,51 @@
-name: 'Antimony measurements'
+name: 'Experiment name'
 
-#base_dir: "\\\\129.94.115.35\\GitHub Queenie\\Experiments\\Antimony"
-base_dir: "C:\\Users\\Serwan\\Documents\\GitHub\\Experiments\\Antimony"
+# Base directory for notebooks  (relative or absolute link).
+base_dir: "example_notebooks"
+# target_dir: "C:\\Experiments\\Experiment_name"
+
+# Target website output directory (relative or absolute link).
 target_dir: "docs"
-pdf_target_dir: "\\\\scipnns001.ad.unsw.edu.au\\qsc\\chaos"
-measurement_overview_folder: "Measurement overview"
 
+# Target directory for PDF output (relative or absolute link)
+pdf_target_dir: "pdf_output"
+
+# Main sections of website
 sections:
-  "Antimony information": "analysis/Antimony information.ipynb"
-  "Measurement overview":
-    path: "analysis/measurement overview"
-    notebook_class: "LogNotebook"
-  Analysis:
-    path: "analysis"
+  # Each section has a title (e.g. General Information)
+  # If the value is a single string, this is the relative path w.r.t. base-dir.
+  # The path can either lead to a notebook, or to a folder containing notebooks
+  "General information": "General information.ipynb"
+
+  # Instead of a string, the value can also be key-value pairs to provide
+  # additional information about the notebook folder.
+  # In this case, we not only specify the relative path, but also that the
+  # notebooks in this folder are LogNotebooks (used for logging), and so
+  # during the conversion, they are treated as such.
+  "Analysis":
+    path: "Analysis"
     notebook_class: "LogNotebook"
 
+# Template settings for generating a website from notebooks.
 template:
-  template_dir: "templates"
+  template_dir: "templates"  # Directory for templates
+  footer: "&copy 2015-2018 Names of experimenters at Andrea Morello's lab, UNSW"
+  experiment_title: 'My experiment'
+
+  # Settings after here are advanced and should generally not be touched.
   version: '1.0'
+  theme: 'cosmo'   # Julia theme to use
   jt_theme_link: ''
-  theme: 'cosmo'
-  auto_highlight_1: 'null'
-  auto_highlight_0: 'pack'
+  auto_highlight_1: 'null'  # Not relevant
+  auto_highlight_0: 'pack'  # Not relevant
   font: "Droid Sans"
-  experiment_title: 'Antimony'
-  footer: "&copy 2015-2018 Serwan Asaad, Mark Johnson, Vincent Mourik at Andrea Morello's lab, UNSW"
-  sidebar:
+  sidebar:  # Settings for the sidebar (containing TOC)
     enabled: True
     logo_source: '' # Source for logo image (not added if empty)
     homepage: ''
-  toc:
+  toc:  # Settings for the table of contents
     threshold: 3 # Max header level to display
-    number_sections: 0
+    number_sections: 0 # Whether to number the sections
 
   # These items are set while generating templates
   navbar_sections: {}
