@@ -312,7 +312,8 @@ class NotebookFolder:
             base_dir = path
 
         if base_dir is not None:
-            assert base_dir.is_absolute(), "Must provide absolute folder_path"
+            base_dir = base_dir.absolute()
+            # assert base_dir.is_absolute(), "Must provide absolute folder_path"
             NotebookFolder.base_dir = base_dir
             Notebook.base_dir = base_dir
 
