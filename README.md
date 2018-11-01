@@ -28,9 +28,9 @@ Note that if the website is sent to the NAS, the `site-libs` folder does not nee
 
 ## Setting up automated website updates
 It is recommended to setup a periodic task that automatically converts all your notebooks into webpages and saves them to the NAS. This ensures that the project information on the website is kept up to date, and allows everyone in the project/group to easily access the recent information. A periodic task can be setup in windows using Task Scheduler. The general procedure is described here: https://www.dummies.com/computers/pcs/how-to-create-a-task-to-run-a-program-in-windows-task-scheduler/
-Be sure to use the following settings:
-**program/scripts**: `python`
-**add arguments (optional)**: `convert_notebooks.py C:\experiment\config.yml`
+When setting up Task Scheduler, use the following settings:  
+**program/scripts**: `python`  
+**add arguments (optional)**: `convert_notebooks.py C:\experiment\config.yml`  
 **start in (optional)**: `C:\notebook_website_generator`
 
-Be sure to replace the paths above with the correct ones.
+where the above paths should be replaced with the correct ones.
