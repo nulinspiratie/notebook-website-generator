@@ -50,7 +50,7 @@ def load_config(config_path):
     # Convert all elements ending with '_dir' to Paths recursively
     conf = _convert_dirs_to_paths(conf)
 
-    if conf['latex_macros_file']:  # Add latex
+    if 'latex_macros_file' in conf:  # Add latex
         latex_macros_filepath = conf['base_dir'] / conf['latex_macros_file']
         conf['template']['latex_macros'] = latex_macros_filepath.read_text()
 
