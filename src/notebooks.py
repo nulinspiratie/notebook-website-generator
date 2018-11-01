@@ -664,7 +664,7 @@ class NotebookFolder:
                 log_folder.convert_to_PDF(target_dir=target_dir)
 
     def compile_index_notebook(self,
-                               filename: str = 'Index',
+                               filename: str = 'index',
                                save: bool = False,
                                recursive: bool = True):
         """
