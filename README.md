@@ -41,3 +41,6 @@ When setting up Task Scheduler, use the following settings:
 **start in (optional)**: `C:\notebook_website_generator`
 
 where the above paths should be replaced with the correct ones.
+
+## Suggestions / complaints
+This website generator is definitely a work in progress, and suggestions for improvements are more than welcome (also bugs). The best way to do this is to create an Issue on GitHub where you explain the suggestion/bug/snarky comment.
