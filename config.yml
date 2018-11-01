@@ -6,6 +6,8 @@ base_dir: "example_notebooks"
 
 # Target website output directory (relative or absolute link).
 html_target_dir: "docs"
+# Once connected to the group NAS, should be set to the following:
+#html_target_dir: "\\\\FQT_NAS\\web"
 
 # Target directory for PDF output (relative or absolute link)
 pdf_target_dir: "pdf_output"
@@ -31,6 +33,9 @@ template:
   template_dir: "templates"  # Directory for templates
   footer: "&copy 2015-2018 Names of experimenters at Andrea Morello's lab, UNSW"
   experiment_title: 'My experiment'
+  # Depth of website, by default 1. Should be increased if this website is not
+  # at the main level (e.g. not a main project)
+  site_depth: 1
 
   # Settings after here are advanced and should generally not be touched.
   version: '1.0'
