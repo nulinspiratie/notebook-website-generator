@@ -1,0 +1,63 @@
+.sidebar-wrapper {
+    height: 100%;
+    left: 0px;
+    padding-top: 50px;
+    padding-left: 0px;
+    position: fixed !important;
+    width: 230px;
+    max-width: 28%;
+    background-color: #eee;
+    font-size: 80%;
+    border-width: 0px;
+    opacity: .99;
+    overflow: hidden;
+}
+
+div#sidebar li {
+    padding-left: 10px;
+}
+
+div#sidebar-header {
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+.display_control_panel {
+    font-size: 80%;
+}
+
+.col-md-9 {
+    overflow: hidden;
+    margin-left: 14%;
+    width: 80%
+}
+
+#sidebar.closed {
+    min-width: 100px;
+    width: auto;
+    transition: width;
+}
+
+#sidebar:hover {
+    opacity: 1;
+}
+
+#sidebar .header {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#sidebar .hide-btn {
+    font-size: 14px;
+    font-family: monospace;
+}
+
+#sidebar .reload-btn {
+    font-size: 14px;
+    font-family: monospace;
+}
+
+#sidebar .number_sections-btn {
+    font-size: 14px;
+    font-family: monospace;
+}
