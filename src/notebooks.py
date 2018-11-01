@@ -201,7 +201,9 @@ class Notebook:
 
             self.template_config['navbar_sections'][name] = link
 
-        self.template_config['site_libs_path'] = self.template_config['base_path'] / '../site-libs'
+        # site-libs path relative to base depends on the depth of the site
+        base_site_libs_path = '../' * self.template_config['site_depth'] + 'site-libs'
+        self.template_config['site_libs_path'] = self.template_config['base_path'] / base_site_libs_path
         self.template_config['parents'] = {str(parent): parent.index_notebook.get_link(self.relative_path)
                                            for parent in self.parents}
         self.template_config['notebook_name'] = str(self)
