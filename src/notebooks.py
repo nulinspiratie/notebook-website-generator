@@ -25,7 +25,7 @@ class Notebook:
 
     def __init__(self, path, name: str = None, index: int = None,
                  read: bool = True, parent: 'NotebookFolder' = None,
-                 template_config: dict = None):
+                 template_config: dict = None, **kwargs):
         assert self.base_dir is not None, "Notebook.base_dir must be set"
 
         self.name = name
@@ -407,10 +407,11 @@ class NotebookFolder:
 
         if NotebookFolder.base_dir is None and base_dir is None:
             logger.info(f'Setting base dir to provided path {path}')
-            base_dir = path
+            base_dir = path.absolute()
+            path = Path('.')
 
         if base_dir is not None:
-            assert base_dir.is_absolute(), "Must provide absolute folder_path"
+            # assert base_dir.is_absolute(), "Must provide absolute folder_path"
             NotebookFolder.base_dir = base_dir
             Notebook.base_dir = base_dir
 
@@ -481,20 +482,21 @@ class NotebookFolder:
                     notebook_class = eval(section.get('notebook_class', 'Notebook'))
 
                 if not isinstance(path, Path):  # Convert to Path
-                    path = self.base_dir / path
+                    path = Path(path)
 
                 # register section
                 NotebookFolder.sections[name]['path'] = path
                 NotebookFolder.sections[name]['notebook_class'] = notebook_class
 
-                if path.is_dir():  # Section is a folder
+                absolute_path = self.base_dir / path
+                if absolute_path.is_dir():  # Section is a folder
                     notebook_folder = NotebookFolder(name=name,
                                                      index=None,
                                                      parent=self,
                                                      **NotebookFolder.sections[name])
                     self.notebook_folders.append(notebook_folder)
                     NotebookFolder.sections[name]['notebook_folder'] = notebook_folder
-                elif path.suffix == '.ipynb':  # Section is a notebook
+                elif absolute_path.suffix == '.ipynb':  # Section is a notebook
                     notebook = notebook_class(name=name,
                                               index=None,
                                               parent=self,
@@ -536,7 +538,7 @@ class NotebookFolder:
             elif name in ignore_names + ['.ipynb_checkpoints']:
                 continue
 
-            log_folder = NotebookFolder(log_folder_path,
+            log_folder = NotebookFolder(log_folder_path.absolute(),
                                         name=name,
                                         index=index,
                                         parent=self,
