@@ -12,6 +12,9 @@ html_target_dir: "docs"
 # Target directory for PDF output (relative or absolute link)
 pdf_target_dir: "pdf_output"
 
+# Uncomment this line to add a LaTeX definitions filepath, added to all webpages
+#latex_macros_file: 'analysis/latexdefs.tex'
+
 # Main sections of website
 sections:
   # Each section has a title (e.g. General Information)
