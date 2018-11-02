@@ -28,11 +28,11 @@ if __name__ == '__main__':
     log_notebook_structure.generate_template(config=config['template'])
 
     log.info('Converting log notebooks to HTML')
-    log_notebook_structure.convert_to_HTML(target_dir=config['html_target_dir'])
+    log_notebook_structure.convert_to_HTML(target_dir=config['html_target_dir'] / config['name'])
 
     log.info('Generating HTML Tipuesearch content')
     log_notebook_structure.generate_tipuesearch_content(
-        save_path=config['html_target_dir'] / 'tipuesearch_content.js')
+        save_path=config['html_target_dir'] / config['name'] / 'tipuesearch_content.js')
 
     log.info('Converting log notebooks to PDF')
     # log_notebook_structure.convert_to_PDF(target_dir=config['pdf_target_dir'])
