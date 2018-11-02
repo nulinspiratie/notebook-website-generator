@@ -54,7 +54,7 @@ function table_of_contents(sidebar, cfg) {
     $("#toc").empty().append(ul);
 
     var depth = 1; //var depth = ol_depth(ol);
-    var li = ul; //yes, initialize li with ul! 
+    var li = ul; //yes, initialize li with ul!
     var all_headers = $("#notebook").find(":header");
     var min_lvl = 1,
         lbl_ary = [];
@@ -130,5 +130,11 @@ function table_of_contents(sidebar, cfg) {
 
     // Show section numbers if enabled
     cfg.number_sections ? $('.toc-item-num').show() : $('.toc-item-num').hide()
+
+    // Ensure that TOC covers rest of sidebar
+    $( window ).resize(function() {
+        $('#toc').height($('#sidebar').height() - $('#sidebar-header').height() - 20);
+        console.log($('#sidebar').height() - $('#sidebar-header').height() - 20)
+      })
 
 }

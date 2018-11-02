@@ -41,7 +41,7 @@ function attach_sidebar(sidebar){
   // Specify resize behaviour of notebook container
   $( window ).resize(function() {
     $('#notebook-container').width($( window ).width() - $('#sidebar').width()-100)
-  })
+  });
 }
 
 function generate_sidebar(logo_source, homepage){
@@ -128,17 +128,17 @@ function add_display_control_panel(sidebar) {
             ).append(
             $("<label/>")
               .append("Source code")
-          ).append(
-            $("<br/>")
-          ).append(
-            $("<input>")
-              .attr('id', 'show_prompt')
-              .attr('name', 'show_prompt')
-              .attr("type", "checkbox")
-              .attr("onclick", "toggle_prompt()")
-          ).append(
-            $("<label/>")
-              .append("Execution prompt")
+          // ).append(
+          //   $("<br/>")
+          // ).append(
+          //   $("<input>")
+          //     .attr('id', 'show_prompt')
+          //     .attr('name', 'show_prompt')
+          //     .attr("type", "checkbox")
+          //     .attr("onclick", "toggle_prompt()")
+          // ).append(
+          //   $("<label/>")
+          //     .append("Execution prompt")
           )
         )
     )

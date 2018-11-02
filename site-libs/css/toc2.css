@@ -2,8 +2,8 @@
 /*extracted from https://gist.github.com/magican/5574556*/
 
 
-/*background color for links when you mouse over it 
-This style is used on export, but can be overwritted in the livenotebook 
+/*background color for links when you mouse over it
+This style is used on export, but can be overwritted in the livenotebook
 by selecting a color in the nbextension-configurator*/
 
 #toc-level0 li>a:hover {
@@ -67,7 +67,6 @@ padding-left: 20px;
 }
 
 .toc {
-    max-height: 700px;
     padding: 0px;
     overflow-y: auto;
     font-weight: normal;
@@ -144,8 +143,8 @@ html body div#sidebar div.toc#toc ul li ul li ul li a code {
 /*
 These colors are now specified in js, after reading the extension's config stored in system
 and updated using the nbextension-configurator
-.toc-item-highlight-select  {background-color: Gold} 
-.toc-item-highlight-execute  {background-color: red} 
+.toc-item-highlight-select  {background-color: Gold}
+.toc-item-highlight-execute  {background-color: red}
 .toc-item-highlight-execute.toc-item-highlight-select   {background-color: Gold} */
 
 .lev1 {
