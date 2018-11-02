@@ -1,4 +1,4 @@
-name: 'Experiment name'
+name: &name 'Experiment name'
 
 # Base directory for notebooks  (relative or absolute link).
 base_dir: "example_notebooks"
@@ -15,22 +15,23 @@ pdf_target_dir: "pdf_output"
 # Main sections of website
 sections:
   # Each section has a title (e.g. General Information)
-  # If the value is a single string, this is the relative path w.r.t. base-dir.
-  # The path can either lead to a notebook, or to a folder containing notebooks
-  "General information": "General information.ipynb"
+  "General information":
+    # The title should contain the relative path w.r.t.base_dir.
+    # The path can either lead to a notebook, or to a folder containing notebooks
+    path: "General information.ipynb"
+    # The notebook_class specifies how the converter should process the notebook
+    # The default class is simply 'Notebook', but can be different (see below)
+    notebook_class: "Notebook"
 
-  # Instead of a string, the value can also be key-value pairs to provide
-  # additional information about the notebook folder.
-  # In this case, we not only specify the relative path, but also that the
-  # notebooks in this folder are LogNotebooks (used for logging), and so
-  # during the conversion, they are treated as such.
+  # Here we specify that the notebooks in this folder are LogNotebooks, i.e.
+  # they are used for logging. This will have consequences during conversion,
+  # in particular it will allow the converter to extract useful information.
   "Analysis":
     path: "Analysis"
     notebook_class: "LogNotebook"
 
 # Template settings for generating a website from notebooks.
 template:
-  experiment_title: 'My experiment'
   footer: "&copy 2015-2018 Names of experimenters at Andrea Morello's lab, UNSW"
 
 # Settings after here are advanced and should generally not be touched.
@@ -39,6 +40,7 @@ template:
   # at the main level (e.g. not a main project)
   site_depth: 1
   version: '1.0'
+  experiment_title: *name
   theme: 'cosmo'   # Julia theme to use
   jt_theme_link: ''
   auto_highlight_1: 'null'  # Not relevant
