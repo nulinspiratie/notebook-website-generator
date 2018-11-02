@@ -24,6 +24,7 @@
     attach_sidebar(sidebar);
     table_of_contents(sidebar, cfg);
     {#$('#toc').css('height', sidebsar.height() - $("#sidebar-header").height());#}
+    $( window).trigger('resize');
   });
 
 </script>
