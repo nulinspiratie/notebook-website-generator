@@ -17,9 +17,6 @@
     <link rel="stylesheet" type="text/css" href="{{site_libs_path}}/css/jt.css">
     {{jt_theme_link}}
 
-    <!-- Custom stylesheet -->
-    <link rel="stylesheet" type="text/css" href="{{site_libs_path}}/css/custom.css">
-
     <!-- jQuery -->
     <script src="{{site_libs_path}}/site_libs/jquery-3.3.1.min.js"></script>
     <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
@@ -43,7 +40,18 @@
     <script src="{{site_libs_path}}/site_libs/highlightjs/highlight.{{ resources.auto_highlight_0 }}.js"></script>
     <script src="{{site_libs_path}}/js/auto_highlight.js"></script>
 
+    <!-- Tipue search -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <script src="{{ resources.base_path }}/tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="{{ site_libs_path }}/site_libs/tipuesearch/css/tipuesearch.css">
+    <script src="{{ site_libs_path }}/site_libs/tipuesearch/tipuesearch_set.js"></script>
+    <script src="{{ site_libs_path }}/site_libs/tipuesearch/tipuesearch.js"></script>
+
     <!-- MathJax -->
+    <!-- Potentially load latex macros -->
+    {% if resources.latex_macros %}
+      $ {{ resources.latex_macros }} $
+    {% endif %}
     <!-- We load MathJax from the webserver since the file is too large -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <!-- <script src="{{site_libs_path}}/site_libs/MathJax.js"></script> -->
@@ -60,6 +68,9 @@
 
     <!-- fluid container goes here(not sure what it does) -->
 {#    $%{fluid_container}#}
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{{site_libs_path}}/css/custom.css">
 </head>
 
 <body>
@@ -67,6 +78,8 @@
 {% include "navbar.html" %}
 
 <div tabindex="-1" id="notebook" class="border-box-sizing">
+
+  <div id="tipue_search_content"></div>
 
   {% if resources.parents|length > 0 %}
     {% include "breadcrumb.html" %}
@@ -125,11 +138,21 @@
 
         {%- endblock codecell %}
 
-        {% block footer %}
-        <hr>
-        {{ footer }}
-    </div>
-</div>
-</body>
-</html>
+{% block footer %}
+  <hr>
+  {{ footer }}
+  </div>
+  </div>
+  </body>
+  <script>
+    $(document).ready(function() {
+        $('#tipue_search_input').tipuesearch();
+      console.log('adding tipue search');
+      if ($("#tipue_search_content").children().length > 0) {
+        console.log('Search activated - hiding notebook container');
+        $("#notebook-container").hide()
+      }
+    });
+  </script>
+  </html>
 {% endblock %}
